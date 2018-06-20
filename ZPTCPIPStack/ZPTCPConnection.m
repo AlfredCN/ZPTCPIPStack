@@ -370,3 +370,27 @@ void zp_tcp_err(void *arg, err_t err)
 }
 
 @end
+    
+    
+#import <netinet/ip.h>
+#import "lwip/ip4.h"
+#import "lwip/udp.h"
+#import "lwip/ip.h"
+#import <arpa/inet.h>
+#import "inet_chksum.h"
+
+@implementation TunnelUdpProcessor
+
++ (BOOL)isUDPPacket:(NSData *)packet
+{
+    uint8_t *data = (uint8_t *)packet.bytes;
+    struct ip_hdr *iphdr = (struct ip_hdr *)data;
+    uint8_t proto = IPH_PROTO(iphdr);
+    if (proto == IP_PROTO_UDP) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+@end
