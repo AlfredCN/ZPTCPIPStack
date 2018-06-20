@@ -122,3 +122,10 @@
 - (void)closeAfterWriting;
 
 @end
+ 
+ 
+@interface TunnelUdpProcessor : NSObject
+
++ (BOOL)isUDPPacket:(NSData *)packet;
+
+@end
